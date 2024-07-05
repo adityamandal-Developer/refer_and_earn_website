@@ -8,17 +8,17 @@ const HowToSection = () => {
     {
       title: "Create Referral",
       description:
-        "Sign up and create a referral link to share with your friends.",
+        "Click on the Refer button above and create a referral link to share with your friends. You will get your referal code in your email",
     },
     {
       title: "Send Referral",
       description:
-        "Send the referral link to your friends via email or social media.",
+        "Send the referral Code to your friends via email or social media.",
     },
     {
       title: "Redeem",
       description:
-        "Your friend signs up using your referral link and makes a purchase.",
+        "Your friend using your referral Code and makes a purchase. Click on the Redeem Button above to Redeem your code",
     },
     {
       title: "Enjoy",
@@ -45,7 +45,7 @@ const HowToSection = () => {
       <h1 className=" flex justify-center items-end text-6xl font-semibold">
         How Does referral work?
       </h1>
-      <div className="flex flex-row md:flex-col">
+      <div className="flex flex-row justify-center sm:items-start md:flex-col">
         <div className="max-w-2xl mx-auto px-4 md:px-0 mt-10">
           <ul
             aria-label="Steps"
@@ -123,11 +123,13 @@ const HowToSection = () => {
             ))}
           </ul>
         </div>
-        <div className="p-20">
-          <h1 className=" text-6xl font-semibold">
+        <div className="p-20 h-96">
+          <h1 className="text-4xl sm:text-6xl font-semibold">
             {stepsData[currentStep].title}
           </h1>
-          <p className=" text-2xl mt-4">{stepsData[currentStep].description}</p>
+          <p className=" text-2xl mt-4 w-5/12">
+            {stepsData[currentStep].description}
+          </p>
         </div>
       </div>
       <div className="flex justify-center gap-10 mt-4">
