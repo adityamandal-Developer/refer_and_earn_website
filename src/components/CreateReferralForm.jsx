@@ -74,7 +74,7 @@ const CreateReferralForm = ({
           <DialogContentText>
             You will revieve your code in E-mail <br />
             <span className="font-semibold">
-              Check your email, including your spam folder, if you haven't
+              Check your email, including your spam folder, if you haven{"'"}t
               received your referral code in your primary inbox
             </span>
             <br />
