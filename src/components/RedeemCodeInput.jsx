@@ -57,10 +57,13 @@ const InputElement = styled("input")(
     &:focus-visible {
       outline: 0;
     }
+          @media (max-width: 768px) {
+      width: 28px; /* Adjust width for smaller screens */
+    }
   `
 );
 
-export default function OTP({ separator, length, value, onChange }) {
+export default function OTP({ separator, length, value, onChange, required }) {
   const inputRefs = React.useRef(new Array(length).fill(null));
 
   const focusInput = (targetIndex) => {
@@ -192,6 +195,7 @@ export default function OTP({ separator, length, value, onChange }) {
           <BaseInput
             slots={{
               input: InputElement,
+              required: "True",
             }}
             aria-label={`Digit ${index + 1} of OTP`}
             slotProps={{
@@ -206,6 +210,7 @@ export default function OTP({ separator, length, value, onChange }) {
                 value: value[index] ?? "",
               },
             }}
+            required
           />
           {index === length - 1 ? null : separator}
         </React.Fragment>

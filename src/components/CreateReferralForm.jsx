@@ -72,17 +72,15 @@ const CreateReferralForm = ({
         <DialogTitle className="text-logo">Create a Referral Code</DialogTitle>
         <DialogContent className="text-link">
           <DialogContentText>
-            To Create a Referral Code, please enter your{" "}
-            <span className="font-bold">Email</span> address and Name here.
-            <span className="font-bold text-black">
-              {" "}
-              We will send you the referral code in your Email
+            You will revieve your code in E-mail <br />
+            <span className="font-semibold">
+              Check your email, including your spam folder, if you haven't
+              received your referral code in your primary inbox
             </span>
             <br />
             <span className="text-red-600">
-              NOTE: You can only create and redeem one referal code per email
+              NOTE: You can only create and redeem one referal code per email.
             </span>
-            .
           </DialogContentText>
           <TextField
             autoFocus

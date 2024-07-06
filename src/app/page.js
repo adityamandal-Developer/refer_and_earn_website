@@ -41,6 +41,3 @@ export default function Home() {
     </main>
   );
 }
-//#16ffbd
-
-//#F070A1

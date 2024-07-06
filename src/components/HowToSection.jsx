@@ -60,12 +60,12 @@ const HowToSection = () => {
                 <div className="flex items-center flex-col gap-x-2">
                   <div
                     className={`w-8 h-8 rounded-full border-2 flex-none flex items-center justify-center ${
-                      currentStep > idx ? "bg-[#F070A1] border-[#F070A1]" : ""
-                    } ${currentStep == idx ? "border-[#F070A1]" : ""}`}
+                      currentStep >= idx ? "bg-[#F070A1] border-[#F070A1]" : ""
+                    } ${currentStep === idx ? "border-[#F070A1]" : ""}`}
                   >
                     <span
                       className={`${
-                        currentStep > idx
+                        currentStep >= idx
                           ? "hidden"
                           : currentStep == idx
                           ? "text-[#F070A1]"
@@ -74,7 +74,7 @@ const HowToSection = () => {
                     >
                       {idx + 1}
                     </span>
-                    {currentStep > idx && (
+                    {currentStep > idx || currentStep === 3 ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -89,7 +89,7 @@ const HowToSection = () => {
                           d="M4.5 12.75l6 6 9-13.5"
                         />
                       </svg>
-                    )}
+                    ) : null}
                   </div>
                   <hr
                     className={`h-12 border md:hidden ${
@@ -132,7 +132,7 @@ const HowToSection = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center gap-10 mt-4">
+      <div className="flex justify-center gap-10 mt-20 sm:mt-8">
         <button
           onClick={prevStep}
           disabled={currentStep === 0}

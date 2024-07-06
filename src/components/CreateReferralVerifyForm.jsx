@@ -83,7 +83,7 @@ const CreateReferralVerifyForm = ({
           onSubmit: handleSubmit,
           sx: {
             backgroundImage: `url('./gradient.svg')`,
-            padding: "20px",
+            padding: "5px",
             borderRadius: "15px",
           },
         }}
@@ -115,22 +115,26 @@ const CreateReferralVerifyForm = ({
             fullWidth
             variant="standard"
           />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              marginTop: 3.5,
-            }}
-          >
-            <OTP
-              separator={<span>-</span>}
-              value={otp}
-              onChange={setOtp}
-              length={6}
-            />
-            <span>Entered value: {otp}</span>
-          </Box>
+          <div className="">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                marginTop: 3.5,
+              }}
+            >
+              <OTP
+                separator={<span>-</span>}
+                value={otp}
+                onChange={setOtp}
+                length={6}
+                required
+              />
+              <span>Entered value: {otp}</span>
+            </Box>
+          </div>
+
           {error && (
             <Alert severity="error" style={{ marginTop: "10px" }}>
               {error}
