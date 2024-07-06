@@ -42,14 +42,14 @@ export const getReferrer = async (id) => {
     }
 };
 
-export const redeemReferral = async (refereeEmail, refereeName, referrerEmail, referralCode) => {
+export const redeemReferral = async (refereeEmail, refereeName, referralCode,) => {
     try {
         const response = await fetch(`${BASE_URL}api/referee`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ refereeEmail, refereeName, referrerEmail, referralCode }),
+            body: JSON.stringify({ refereeEmail, refereeName, referralCode }),
         });
 
         if (!response.ok) {

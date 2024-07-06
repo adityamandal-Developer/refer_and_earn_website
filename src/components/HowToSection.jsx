@@ -45,7 +45,7 @@ const HowToSection = () => {
       <h1 className=" flex justify-center items-end text-6xl font-semibold">
         How Does referral work?
       </h1>
-      <div className="flex flex-row justify-center sm:items-start md:flex-col">
+      <div className="flex flex-row justify-center items-center md:items-start md:flex-col">
         <div className="max-w-2xl mx-auto px-4 md:px-0 mt-10">
           <ul
             aria-label="Steps"
@@ -123,11 +123,11 @@ const HowToSection = () => {
             ))}
           </ul>
         </div>
-        <div className="p-20 h-96">
-          <h1 className="text-4xl sm:text-6xl font-semibold">
+        <div className="sm:p-20 py-20 sm:w-[80%]">
+          <h1 className="text-4xl sm:text-6xl font-semibold h-[110px]">
             {stepsData[currentStep].title}
           </h1>
-          <p className=" text-2xl mt-4 w-5/12">
+          <p className="text-2xl mt-4 h-[120px]">
             {stepsData[currentStep].description}
           </p>
         </div>
@@ -148,6 +148,9 @@ const HowToSection = () => {
           <GrNext />
         </button>
       </div>
+      <h1 className="text-link flex justify-center items-center mt-10 p-2 text-[5vw]">
+        Thanks For using <span className="text-logo ml-2">Refer App</span>
+      </h1>
     </section>
   );
 };

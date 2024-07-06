@@ -7,10 +7,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { createReferral } from "../libs/api/referral.api";
+import { createReferral, redeemReferral } from "../libs/api/referral.api";
 import { Alert } from "@mui/material";
+import PropTypes from "prop-types";
+import { Input as BaseInput } from "@mui/base/Input";
+import { Box, styled } from "@mui/system";
+import OTP from "./RedeemCodeInput";
 
-const CreateReferralForm = ({
+const CreateReferralVerifyForm = ({
   open,
   setOpen,
   handleClickOpen,
@@ -19,22 +23,37 @@ const CreateReferralForm = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [otp, setOtp] = React.useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     const formData = new FormData(event.currentTarget);
+    formData.append("referralCode", otp);
     const formJson = Object.fromEntries(formData.entries());
-    const { email, name } = formJson;
+
+    const { email, name, referralCode } = formJson;
+
+    const apiPayload = {
+      refereeEmail: email,
+      refereeName: name,
+      referralCode: referralCode,
+    };
+
+    console.log(apiPayload);
 
     try {
-      const result = await createReferral(email, name);
+      const result = await redeemReferral(
+        apiPayload.refereeEmail,
+        apiPayload.refereeName,
+        apiPayload.referralCode
+      );
       if (result.error) {
         setError(result.error);
       } else {
         setSnackbar({
           open: true,
-          message: "Referral code created successfully! Check your email.",
+          message: "Referral Verified Sucessfully!.",
           severity: "success",
         });
         handleClose(setError);
@@ -69,20 +88,11 @@ const CreateReferralForm = ({
           },
         }}
       >
-        <DialogTitle className="text-logo">Create a Referral Code</DialogTitle>
+        <DialogTitle className="text-logo">Redeem Code</DialogTitle>
         <DialogContent className="text-link">
           <DialogContentText>
-            To Create a Referral Code, please enter your{" "}
-            <span className="font-bold">Email</span> address and Name here.
-            <span className="font-bold text-black">
-              {" "}
-              We will send you the referral code in your Email
-            </span>
-            <br />
-            <span className="text-red-600">
-              NOTE: You can only create and redeem one referal code per email
-            </span>
-            .
+            Enter <span className="font-bold"> Your 6 digit Redeem Code</span>{" "}
+            Email address and Name here.
           </DialogContentText>
           <TextField
             autoFocus
@@ -105,6 +115,22 @@ const CreateReferralForm = ({
             fullWidth
             variant="standard"
           />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              marginTop: 3.5,
+            }}
+          >
+            <OTP
+              separator={<span>-</span>}
+              value={otp}
+              onChange={setOtp}
+              length={6}
+            />
+            <span>Entered value: {otp}</span>
+          </Box>
           {error && (
             <Alert severity="error" style={{ marginTop: "10px" }}>
               {error}
@@ -133,4 +159,4 @@ const CreateReferralForm = ({
   );
 };
 
-export default CreateReferralForm;
+export default CreateReferralVerifyForm;

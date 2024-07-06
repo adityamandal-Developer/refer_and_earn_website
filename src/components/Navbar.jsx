@@ -62,7 +62,7 @@ const Navbar = () => {
       </nav>
       <nav>
         <div className="flex justify-center items-center cursor-pointer p-4">
-          <h1 className="text-logo text-6xl font-bold hover:text-[#ff3582] transition-all duration-300 ease-linear hover:drop-shadow-2xl sm:hidden">
+          <h1 className="text-logo text-6xl mt-6 font-bold hover:text-[#ff3582] transition-all duration-300 ease-linear hover:drop-shadow-2xl sm:hidden">
             Accredian
           </h1>
         </div>
