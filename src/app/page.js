@@ -1,4 +1,5 @@
 'use client'
+require('dotenv').config();
 import HowToSection from "@/components/HowToSection";
 import Navbar from "@/components/Navbar";
 import Referral from "@/components/Referral";

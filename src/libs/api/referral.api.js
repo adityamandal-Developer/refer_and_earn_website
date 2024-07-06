@@ -1,5 +1,5 @@
-// const BASE_URL = process.env.BACKEND_URL;
-const BASE_URL = "http://localhost:3001/";
+const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+// const BASE_URL = "http://localhost:3001/";
 
 export const createReferral = async (email, name) => {
     try {

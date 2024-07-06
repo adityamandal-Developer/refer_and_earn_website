@@ -151,7 +151,7 @@ const CreateReferralVerifyForm = ({
             disabled={loading}
             sx={{ bgcolor: "Black", color: "#16ffbd" }}
           >
-            {loading ? "Creating..." : "GET CODE"}
+            {loading ? "Creating..." : "REDEEM"}
           </Button>
         </DialogActions>
       </Dialog>
