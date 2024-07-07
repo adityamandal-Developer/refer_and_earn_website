@@ -9,6 +9,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { createReferral } from "../libs/api/referral.api";
 import { Alert } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { formSchema } from "@/libs/validationSchema/formValidation";
 
 const CreateReferralForm = ({
   open,
@@ -20,12 +23,18 @@ const CreateReferralForm = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = async (data) => {
     setLoading(true);
-    const formData = new FormData(event.currentTarget);
-    const formJson = Object.fromEntries(formData.entries());
-    const { email, name } = formJson;
+    const { email, name } = data;
 
     try {
       const result = await createReferral(email, name);
@@ -38,6 +47,7 @@ const CreateReferralForm = ({
           severity: "success",
         });
         handleClose(setError);
+        reset();
       }
     } catch (error) {
       setSnackbar({
@@ -61,7 +71,7 @@ const CreateReferralForm = ({
         onClose={() => handleClose(setError)}
         PaperProps={{
           component: "form",
-          onSubmit: handleSubmit,
+          onSubmit: handleSubmit(onSubmit),
           sx: {
             backgroundImage: `url('./gradient.svg')`,
             padding: "20px",
@@ -72,14 +82,14 @@ const CreateReferralForm = ({
         <DialogTitle className="text-logo">Create a Referral Code</DialogTitle>
         <DialogContent className="text-link">
           <DialogContentText>
-            You will revieve your code in E-mail <br />
+            You will receive your code in E-mail <br />
             <span className="font-semibold">
               Check your email, including your spam folder, if you haven{"'"}t
               received your referral code in your primary inbox
             </span>
             <br />
             <span className="text-red-600">
-              NOTE: You can only create and redeem one referal code per email.
+              NOTE: You can only create and redeem one referral code per email.
             </span>
           </DialogContentText>
           <TextField
@@ -87,21 +97,25 @@ const CreateReferralForm = ({
             required
             margin="dense"
             id="email"
-            name="email"
             label="Email Address"
             type="email"
             fullWidth
             variant="standard"
+            {...register("email")}
+            error={!!errors.email}
+            helperText={errors.email?.message}
           />
           <TextField
             required
             margin="dense"
             id="name"
-            name="name"
             label="Name"
             type="text"
             fullWidth
             variant="standard"
+            {...register("name")}
+            error={!!errors.name}
+            helperText={errors.name?.message}
           />
           {error && (
             <Alert severity="error" style={{ marginTop: "10px" }}>
@@ -112,7 +126,10 @@ const CreateReferralForm = ({
 
         <DialogActions>
           <Button
-            onClick={() => handleClose(setError)}
+            onClick={() => {
+              handleClose(setError);
+              reset();
+            }}
             disabled={loading}
             sx={{ bgcolor: "Black", color: "#F070A1" }}
           >
